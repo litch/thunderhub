@@ -100,6 +100,8 @@ export const OpenChannel = ({ setOpenCard }: OpenChannelProps) => {
     switch (name) {
       case 'ThunderHub':
         return <Cpu size={18} />;
+      case 'Voltage':
+        return <Zap size={18} />;
       case 'Bitrefill':
         return <ShoppingCart size={18} />;
       case 'Zap':
@@ -130,11 +132,26 @@ export const OpenChannel = ({ setOpenCard }: OpenChannelProps) => {
     </>
   );
 
+  const voltageItem = {
+    name: 'Voltage',
+    public_key:
+      '031f2669adab71548fad4432277a0d90233e3bc07ac29cfb0b3e01bd3fb26cb9fa',
+    socket: '44.242.118.94:9735',
+  };
+
+  const getVoltageItem = () => (
+    <Item key={`voltage`} onClick={() => setPartner(voltageItem)}>
+      <IconStyle>{getIcon(voltageItem.name || '')}</IconStyle>
+      {voltageItem.name}
+    </Item>
+  );
+
   const renderContent = () => {
     if (!partner) {
       return (
         <>
           <Container>
+            {getVoltageItem()}
             {(data?.getBaseNodes || []).map(
               (item, index) =>
                 item && (
